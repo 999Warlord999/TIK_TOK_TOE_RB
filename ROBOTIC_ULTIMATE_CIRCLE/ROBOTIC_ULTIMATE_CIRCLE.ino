@@ -98,7 +98,7 @@ void cal_circle(){
   int r = 4;
   int x0 = 20;
   int y0 = 10,l1 = 25,l2 =20; 
-  for(int t3 = 0; t3 <= 360; t3 += 20)
+  for(int t3 = 0; t3 <= 360; t3 += 36)
   {
     //Serial.println(t3);
     t4 = t3*PI/180;
@@ -225,8 +225,8 @@ void move_circle() {
     Serial.print(arr[i3]);
     Serial.print("--");
     Serial.println(arr2[i3]);
-    if (i3 > arr_length * 1 / 5) delay_time_change += 300;
-    if (i3 > arr_length * 3 / 5) delay_time_change += 600;
+    if (i3 > arr_length * 1 / 5) delay_time_change += 100;
+    if (i3 > arr_length * 3 / 5) delay_time_change += 300;
     Move();
   }
   delay_time_change = 0;
@@ -332,7 +332,7 @@ void moveXZ(long nStepX, int stepPinX, long nStepZ, int stepPinZ) {
  
   for (int i = 1 ; i <= nStepMax ; i = i + 1) {
     current_axis_min = i / ratio_max_min;
-    if (i > nStepMax * 2 / 3) Delay += 25;
+    if (i > nStepMax * 2 / 3) Delay += 20;
     if (current_axis_min - steps_axis_min >= 1) {
       digitalWrite(stepPinMin, HIGH);
       pulseMin = 1;
@@ -367,7 +367,7 @@ void moveXZ_shape(long nStepX, int stepPinX, long nStepZ, int stepPinZ) {
   float current_axis_min = 0;
   long steps_axis_min = 0;
   float ratio_max_min = 0;
-  int Delay = 8000 + delay_time_change;
+  int Delay = 7000 + delay_time_change;
   int pulseMax = 0; //print to monitor
   int pulseMin = 0; //print to monitor
   

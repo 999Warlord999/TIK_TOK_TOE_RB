@@ -10,13 +10,13 @@ const int dirPin2  = 9;
 //KHAI BIEN STEP 1
 int currentAngle = 0;
 int angle = 0;
-float stepPerAngle = 1.8/4 ; // full step = 1.8
+float stepPerAngle = 1.8/16 ; // full step = 1.8
 int   numstep;
 
 //KHAI BIEN STEP2
 int currentAngle2 = 0;
 int angle2 = 0;
-float stepPerAngle2 = 1.8/4 ; // full step = 1.8
+float stepPerAngle2 = 1.8/16 ; // full step = 1.8
 int   numstep2;
 
 //KHAI BIEN CHO HAM VE
@@ -192,8 +192,8 @@ void move_cross1() {
     Serial.print(arr3[i3]);
     Serial.print("--");
     Serial.println(arr2[i3]);
-    if (i3 > arr_length * 1 / 5) delay_time_change += 900;
-    if (i3 > arr_length * 3 / 5) delay_time_change += 1200;
+    if (i3 > arr_length * 1 / 5) delay_time_change += 100;
+    if (i3 > arr_length * 3 / 5) delay_time_change += 500;
     Move();
   }
   delay_time_change = 0;
@@ -209,8 +209,8 @@ void move_cross2() {
     Serial.print(arr5[i3]);
     Serial.print("--");
     Serial.println(arr6[i3]);
-    if (i3 > arr_length * 1 / 5) delay_time_change += 800;
-    if (i3 > arr_length * 3 / 5) delay_time_change += 1500;
+    if (i3 > arr_length * 1 / 5) delay_time_change += 100;
+    if (i3 > arr_length * 3 / 5) delay_time_change += 500;
     Move();
   }
   delay_time_change = 0;
@@ -225,8 +225,8 @@ void move_circle() {
     Serial.print(arr[i3]);
     Serial.print("--");
     Serial.println(arr2[i3]);
-    if (i3 > arr_length * 1 / 5) delay_time_change += 100;
-    if (i3 > arr_length * 3 / 5) delay_time_change += 300;
+    if (i3 > arr_length * 1 / 5) delay_time_change += 10;
+    if (i3 > arr_length * 3 / 5) delay_time_change += 20;
     Move();
   }
   delay_time_change = 0;
@@ -270,10 +270,6 @@ void Move(){
       if( angle == 0) n = currentAngle;
       numstep = (n / stepPerAngle) * 3;
     }
-    moveXZ_shape(numstep, stepPin1, numstep2, stepPin2);
-    currentAngle = angle;
-    currentAngle2 = angle2;
-  }
   
   else if(( currentAngle != angle )&&( currentAngle2 != angle2 )){
     if( currentAngle < angle){
@@ -317,7 +313,7 @@ void moveXZ(long nStepX, int stepPinX, long nStepZ, int stepPinZ) {
   float current_axis_min = 0;
   long steps_axis_min = 0;
   float ratio_max_min = 0;
-  int Delay = 7500;
+  int Delay = 1800;
   int pulseMax = 0; //print to monitor
   int pulseMin = 0; //print to monitor
   
@@ -332,7 +328,7 @@ void moveXZ(long nStepX, int stepPinX, long nStepZ, int stepPinZ) {
  
   for (int i = 1 ; i <= nStepMax ; i = i + 1) {
     current_axis_min = i / ratio_max_min;
-    if (i > nStepMax * 2 / 3) Delay += 20;
+    if (i > nStepMax * 3/4) Delay += 2;
     if (current_axis_min - steps_axis_min >= 1) {
       digitalWrite(stepPinMin, HIGH);
       pulseMin = 1;
@@ -367,7 +363,7 @@ void moveXZ_shape(long nStepX, int stepPinX, long nStepZ, int stepPinZ) {
   float current_axis_min = 0;
   long steps_axis_min = 0;
   float ratio_max_min = 0;
-  int Delay = 7000 + delay_time_change;
+  int Delay = 2000 + delay_time_change;
   int pulseMax = 0; //print to monitor
   int pulseMin = 0; //print to monitor
   
